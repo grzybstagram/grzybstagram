@@ -1,16 +1,35 @@
 # grzybstagram
 
-Niezależny blog o grzybach w kontekście zdrowia. Fakty, źródła, nauka i opinie bez cenzury.
+Niezależny blog o grzybach. Astro 6 + Tailwind + MDX.
 
-Stack: Astro 6 + Tailwind CSS + MDX.
-
-## Lokalnie
+## Uruchomienie lokalnie
 
 ```bash
 npm install
-npm run dev   # http://localhost:4321
+npm run dev
 ```
 
-## Zasady projektu
+Strona dostępna na http://localhost:4321
 
-Patrz [CLAUDE.md](./CLAUDE.md) — zasady redakcyjne i techniczne.
+## Build produkcyjny
+
+```bash
+npm run build
+```
+
+Output: `dist/`. Deploy automatyczny z GitHuba na Hostingera (push do `main` → auto-deploy).
+
+## Zasady redakcyjne i workflow
+
+Zobacz [CLAUDE.md](./CLAUDE.md) — kierunek redakcyjny, ton, ograniczenia prawne, format frontmatter postów.
+
+## Stack
+
+- Astro 6 (static)
+- Tailwind CSS 4
+- MDX
+- date-fns (locale: pl)
+
+## Licencja motywu
+
+Bazowy szablon: [Brook 2.0](https://github.com/holger1411/astro-brook) by Holger Bartel — MIT. Customizacja własna.
