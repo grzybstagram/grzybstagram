@@ -10,15 +10,15 @@ export async function GET(context) {
   );
   
   return rss({
-    title: 'Brook Blog',
-    description: 'A minimalist blog template focusing on clean typography and distraction-free reading experience',
+    title: 'grzybstagram',
+    description: 'Niezależny blog o grzybach. Fakty, źródła, nauka i opinie bez cenzury.',
     site: context.site,
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.excerpt,
-      link: `/posts/${post.id}/`,
+      link: `/wpisy/${post.id}/`,
     })),
-    customData: `<language>en-us</language>`,
+    customData: `<language>pl-PL</language>`,
   });
 }

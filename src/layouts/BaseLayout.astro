@@ -12,21 +12,30 @@ interface Props {
   publishedDate?: Date;
   modifiedDate?: Date;
   author?: string;
+  pageType?: 'home' | 'blog' | 'post' | 'page';
+  noindex?: boolean;
 }
 
-const { 
-  title, 
-  description = "A minimalist blog template focusing on clean typography and distraction-free reading experience.", 
-  image = "/og-image.png",
+const {
+  title,
+  description = "Niezależny blog o grzybach w kontekście zdrowia. Fakty, źródła, nauka i opinie bez cenzury.",
+  image = "/og-default.png",
   type = "website",
   publishedDate,
   modifiedDate,
-  author = "Brook Team"
+  author = "grzybstagram",
+  pageType = "page",
+  noindex = false
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = image.startsWith('/') ? new URL(image, Astro.site) : image;
-const siteName = "Brook Blog";
+const siteName = "grzybstagram";
+
+const fullTitle =
+  title === siteName ? siteName
+  : title.length > 50 ? title
+  : `${title} — ${siteName}`;
 
 // Strukturierte Daten (JSON-LD) für bessere SEO
 const jsonLDWebsite = {
@@ -37,9 +46,26 @@ const jsonLDWebsite = {
   "description": description,
 };
 
+const jsonLDOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": siteName,
+  "url": Astro.site?.toString(),
+  "logo": new URL("/favicon.svg", Astro.site).toString(),
+  "sameAs": []
+};
+
+const jsonLDBlog = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": siteName,
+  "url": Astro.site?.toString(),
+  "description": description,
+};
+
 const jsonLDArticle = publishedDate ? {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "headline": title,
   "image": ogImageURL.toString(),
   "author": {
@@ -59,18 +85,21 @@ const jsonLDArticle = publishedDate ? {
   "mainEntityOfPage": canonicalURL.toString(),
 } : null;
 
-const jsonLD = type === 'article' && jsonLDArticle ? jsonLDArticle : jsonLDWebsite;
+const jsonLdBlocks = [jsonLDWebsite, jsonLDOrganization];
+if (type === 'article' && jsonLDArticle) jsonLdBlocks.push(jsonLDArticle);
+if (pageType === 'home' || pageType === 'blog') jsonLdBlocks.push(jsonLDBlog);
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="pl" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} | Brook</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex" />}
 
     <!-- Aktivieren der View Transitions -->
     <ClientRouter />
@@ -92,14 +121,18 @@ const jsonLD = type === 'article' && jsonLDArticle ? jsonLDArticle : jsonLDWebsi
       // Re-apply after view transitions
       document.addEventListener('astro:after-swap', applyTheme);
     </script>
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="grzybstagram — niezależny blog o grzybach" />
     <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="pl_PL" />
     {publishedDate && <meta property="article:published_time" content={publishedDate.toISOString()} />}
     {modifiedDate && <meta property="article:modified_time" content={modifiedDate.toISOString()} />}
 
@@ -109,10 +142,10 @@ const jsonLD = type === 'article' && jsonLDArticle ? jsonLDArticle : jsonLDWebsi
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImageURL} />
-    
+
     <!-- Strukturierte Daten für SEO -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
-    
+    {jsonLdBlocks.map(block => <script type="application/ld+json" set:html={JSON.stringify(block)} />)}
+
     <style is:inline>
       body {
         font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -126,14 +159,14 @@ const jsonLD = type === 'article' && jsonLDArticle ? jsonLDArticle : jsonLDWebsi
     <div class="bg-white dark:bg-black transition-colors duration-300">
       <header class="mx-auto max-w-4xl py-8">
         <div class="flex items-center justify-between">
-          <a href="/" class="text-2xl font-semibold" transition:animate="fade">Brook2</a>
+          <a href="/" class="text-2xl font-semibold" transition:animate="fade">grzybstagram</a>
 
           <!-- Desktop Navigation -->
           <div class="hidden md:flex items-center gap-6">
             <nav class="flex items-center gap-6">
-              <a href="/" class="nav-link">Home</a>
-              <a href="/journal" class="nav-link">Journal</a>
-              <a href="/about" class="nav-link">About</a>
+              <a href="/" class="nav-link">Start</a>
+              <a href="/wpisy" class="nav-link">Wpisy</a>
+              <a href="/about" class="nav-link">O blogu</a>
             </nav>
             <DarkModeToggle />
           </div>
@@ -146,7 +179,7 @@ const jsonLD = type === 'article' && jsonLDArticle ? jsonLDArticle : jsonLDWebsi
               type="button"
               class="inline-flex items-center justify-center p-2 bg-white dark:bg-black text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none border-0"
               aria-expanded="false"
-              aria-label="Toggle menu"
+              aria-label="Menu"
             >
             <svg id="menu-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -160,25 +193,25 @@ const jsonLD = type === 'article' && jsonLDArticle ? jsonLDArticle : jsonLDWebsi
 
         <!-- Mobile Navigation -->
         <nav id="mobile-menu" class="hidden md:hidden mt-6 pt-4 border-t border-gray-200 dark:border-gray-800 space-y-1">
-          <a href="/" class="block px-3 py-2 text-sm text-gray-900 dark:text-gray-300 hover:underline">Home</a>
-          <a href="/journal" class="block px-3 py-2 text-sm text-gray-900 dark:text-gray-300 hover:underline">Journal</a>
-          <a href="/about" class="block px-3 py-2 text-sm text-gray-900 dark:text-gray-300 hover:underline">About</a>
+          <a href="/" class="block px-3 py-2 text-sm text-gray-900 dark:text-gray-300 hover:underline">Start</a>
+          <a href="/wpisy" class="block px-3 py-2 text-sm text-gray-900 dark:text-gray-300 hover:underline">Wpisy</a>
+          <a href="/about" class="block px-3 py-2 text-sm text-gray-900 dark:text-gray-300 hover:underline">O blogu</a>
         </nav>
       </header>
-      
+
       <main class="py-10" transition:animate="fade">
         <slot />
       </main>
-      
+
       <footer class="max-w-4xl mx-auto py-8 border-t border-gray-200 dark:border-gray-800 mt-12">
           <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-sm text-gray-500 dark:text-gray-500">
-              Made by <a href="https://templatedeck.com" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 dark:hover:text-gray-100">templatedeck.com</a>
+              © 2026 grzybstagram
             </div>
             <nav class="flex items-center gap-4">
-              <a href="/" class="nav-link-footer">Home</a>
-              <a href="/journal" class="nav-link-footer">Journal</a>
-              <a href="/about" class="nav-link-footer">About</a>
+              <a href="/" class="nav-link-footer">Start</a>
+              <a href="/wpisy" class="nav-link-footer">Wpisy</a>
+              <a href="/about" class="nav-link-footer">O blogu</a>
             </nav>
           </div>
       </footer>

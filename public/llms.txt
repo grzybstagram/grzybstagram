@@ -1,0 +1,17 @@
+# grzybstagram
+
+> Niezależny blog o grzybach w kontekście zdrowia. Fakty, źródła, nauka i opinie bez cenzury.
+
+Domena: https://grzybstagram.pl
+
+## Mission
+
+grzybstagram to niezależny polskojęzyczny blog o królestwie grzybów. Bez wellness-fluffu, bez claimów marketingowych. Standard: ostra szczerość, fakty, źródła. Pozycja: ciekawski sceptyk z research'em, nie guru, nie influencer wellness.
+
+## Content
+
+TODO — uzupełnimy po dodaniu pierwszych wpisów.
+
+## Editorial principles
+
+TODO — placeholder.

@@ -1,0 +1,85 @@
+# robots.txt — grzybstagram
+# polityka: search=yes (chcemy być cytowani), ai-train=no
+
+# === Standardowy dostęp ===
+User-agent: *
+Allow: /
+
+# === Content-Signal directive (Cloudflare 2024+) ===  # [DO WERYFIKACJI: aktualny format spec stanu 2026]
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# === BLOKADA training botów ===
+User-agent: GPTBot                  # OpenAI training
+Disallow: /
+
+User-agent: Google-Extended         # Google Gemini training
+Disallow: /
+
+User-agent: ClaudeBot               # Anthropic training  # [DO WERYFIKACJI: nazwa stanu 2026, była zmiana z anthropic-ai]
+Disallow: /
+
+User-agent: anthropic-ai            # legacy Anthropic crawler
+Disallow: /
+
+User-agent: FacebookBot             # Meta training  # [DO WERYFIKACJI: vs Meta-ExternalAgent]
+Disallow: /
+
+User-agent: Meta-ExternalAgent      # Meta training (nowsze)  # [DO WERYFIKACJI]
+Disallow: /
+
+User-agent: Bytespider              # ByteDance/TikTok training
+Disallow: /
+
+User-agent: CCBot                   # Common Crawl (źródło dla wielu trenerów)
+Disallow: /
+
+User-agent: Applebot-Extended       # Apple Intelligence training
+Disallow: /
+
+User-agent: cohere-ai               # Cohere training  # [DO WERYFIKACJI: nazwa]
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: YouBot                  # You.com
+Disallow: /
+
+User-agent: Amazonbot               # [DO WERYFIKACJI: Alexa+ używa do answers, kontrowersja]
+Disallow: /
+
+# === ALLOW citation/search botów ===
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot                # Spotlight (nie Apple Intelligence)
+Allow: /
+
+User-agent: ChatGPT-User            # OpenAI on-demand fetch z citation
+Allow: /
+
+User-agent: OAI-SearchBot           # OpenAI SearchGPT  # [DO WERYFIKACJI: nazwa stanu 2026]
+Allow: /
+
+User-agent: PerplexityBot           # search index
+Allow: /
+
+User-agent: Perplexity-User         # on-demand fetch z citation
+Allow: /
+
+User-agent: Claude-User             # Anthropic inference z citation (≠ ClaudeBot)
+Allow: /
+
+Sitemap: https://grzybstagram.pl/sitemap-index.xml

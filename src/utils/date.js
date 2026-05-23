@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { pl } from 'date-fns/locale';
 
 /**
  * Format a date string or Date object into a human-readable format
@@ -7,5 +8,5 @@ import { format } from 'date-fns';
  */
 export function formatDate(date) {
   const dateObject = typeof date === 'string' ? new Date(date) : date;
-  return format(dateObject, 'MMMM d, yyyy');
+  return format(dateObject, 'd MMMM yyyy', { locale: pl });
 }

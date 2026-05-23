@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
+import { pluralPL } from '../../utils/plural';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
@@ -32,25 +33,25 @@ const sortedPosts = posts.sort((a, b) =>
 // Format posts for the PostList component
 const formattedPosts = sortedPosts.map(post => ({
   ...post,
-  url: `/posts/${post.id}`,
+  url: `/wpisy/${post.id}`,
   frontmatter: post.data
 }));
 ---
 
-<BaseLayout title={`Posts tagged with "${tag}"`}>
+<BaseLayout title={`Wpisy z tagiem „${tag}”`}>
   <div class="max-w-3xl mx-auto">
     <header class="mb-12 text-center">
       <h1 class="text-5xl mb-4">Tag: {tag}</h1>
       <p class="text-xl text-muted-foreground">
-        {posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged with "{tag}"
+        {pluralPL(posts.length, ['wpis', 'wpisy', 'wpisów'])} z tagiem „{tag}”
       </p>
     </header>
 
     <PostList posts={formattedPosts} />
-    
+
     <div class="mt-12 text-center">
-      <a href="/journal" class="cta-button">
-        View All Posts
+      <a href="/wpisy" class="cta-button">
+        Wszystkie wpisy
       </a>
     </div>
   </div>
