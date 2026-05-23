@@ -1,20 +1,79 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "O blogu";
+const description = "Manifest niezależnego bloga o grzybach — czego się tu nie napisze i dlaczego. Bez afiliacji, bez claimów leczniczych, z linkami do badań.";
 ---
 
-<BaseLayout title="O blogu">
-  <div class="max-w-3xl mx-auto">
+<BaseLayout title={title} description={description}>
+  <article class="max-w-3xl mx-auto">
     <header class="mb-12 text-center" transition:animate="fade">
       <h1 class="text-5xl mb-4">O blogu</h1>
       <p class="text-xl text-muted-foreground">
-        Strona w przygotowaniu
+        Czego się tu nie napisze i dlaczego.
       </p>
     </header>
 
     <div class="prose prose-lg dark:prose-invert max-w-none" transition:animate="fade">
       <p>
-        Strona w przygotowaniu.
+        Większość tego, co przeczytasz po polsku o reishi, lion's mane czy cordycepsie, to ten sam artykuł napisany sto razy w różnej obudowie. Zazwyczaj przepisany ze strony producenta, czasem z błędem łacińskiej nazwy. Jeśli nie pasuje to do twojego standardu czytania o własnym zdrowiu — dobrze trafiłeś.
+      </p>
+
+      <h2>Co jest nie tak z polskim internetem o grzybach</h2>
+
+      <p>
+        Schemat jest powtarzalny do bólu. Producent zleca artykuł, copywriter klepie tekst z encyklopedii i marketingowej broszury, ktoś wkleja „według najnowszych badań" bez linku do badania. Influencer dostaje próbkę i procent od linka afiliacyjnego. <em>Inonotus obliquus</em> miesza się z <em>Phellinus</em> (czyli czaga z czymś, co czagą nie jest). Standaryzowane β-glukany reklamuje się bez podanej metody pomiaru, co w praktyce znaczy, że liczba na opakowaniu nie znaczy nic. Na koniec dochodzi „cudowny grzyb na wszystko" w środowisku, gdzie większość obietnic opiera się na małej próbie na myszach z 2008 roku.
+      </p>
+
+      <p>
+        Nie napiszemy, że to wina jednej firmy. Napiszemy, że to kultura, której uczestnicy wzajemnie się kryją.
+      </p>
+
+      <h2>Co znajdziesz tutaj — i dlaczego sama nauka nie wystarczy</h2>
+
+      <p>
+        Każda mocna teza idzie z linkiem do badania: DOI albo PubMed ID. Pełne nazwy łacińskie, bo „soplówka" i <em>Hericium erinaceus</em> to dwie różne kategorie precyzji.
+      </p>
+
+      <p>
+        Ale samą nauką tego nie zrobimy. Systemowo, jako branża, publicznie nie wolno nam powiedzieć właściwie nic o tym, jak grzyby działają. Rozporządzenie unijne 1924/2006 zabrania twierdzeń zdrowotnych bez zatwierdzonych claim EFSA, a dla grzybów funkcjonalnych EFSA nie zatwierdziła ani jednego. Efekt jest taki, jaki widzisz: ci, którzy mają pojęcie, milczą publicznie. Ci, którzy nie mają, krzyczą o cudach na Instagramie.
+      </p>
+
+      <p>
+        Robimy więc miks. Nauka tam, gdzie jest. Relacje praktyków tam, gdzie nauki jeszcze nie ma. Z jasnym oznaczeniem, co jest czym. Nie sprzedajemy ci niczego i nie obiecujemy żadnego efektu — opisujemy stan wiedzy i stan praktyki, ty oceniasz, co z tym chcesz robić.
+      </p>
+
+      <p>
+        Zero afiliacji. Żadnego linku z prowizją. Żadnego „polecam ten produkt" bez wytłumaczenia, dlaczego ten. Krytyka konkretnych marek po nazwisku, kiedy mamy na to fakty.
+      </p>
+
+      <h2>Gdzie się zatrzymujemy</h2>
+
+      <p>
+        Będzie tu o psychodelikach. O psilocybinie i badaniach Imperial College nad depresją lekooporną. O Johns Hopkins, MAPS, o microdosingu z perspektywy harm reduction: jak ludzie to faktycznie robią, na co uważać, gdzie kończy się wiedza i zaczyna myślenie życzeniowe.
+      </p>
+
+      <p>
+        Nie będzie o tym, jak uprawiać. Gdzie kupić zarodniki. Jakie dawki sobie zaaplikować na własną rękę. Różnica między dorosłą rozmową a kanałem na Telegramie polega właśnie na tej linii.
+      </p>
+
+      <h2>Kto pisze i dlaczego anonimowo</h2>
+
+      <p>
+        Podpisujemy się: MyCELLium on a human mission.
+      </p>
+
+      <p>
+        Nie jeden autor. Sieć — praktycy z krwi i kości, lata realnie używający tych grzybów u siebie i u tych, którym pomagają. Mycelium to siatka pod ziemią, nie pojedynczy grzyb. Ten blog to to samo.
+      </p>
+
+      <p>
+        Decyzja o anonimowości nie wynika z tchórzostwa. Wynika z konfliktów interesów, które byłyby widoczne, gdybyśmy się podpisali. I które wpłynęłyby na to, jak czytasz każde zdanie. Wolimy, żebyś oceniał teksty po treści. Po linkach do badań. Po tym, czy nasza krytyka się broni, kiedy sprawdzisz źródła.
+      </p>
+
+      <p>
+        Każde słowo na nasze konto. Mimo że nie pod naszymi imionami.
       </p>
     </div>
-  </div>
+  </article>
 </BaseLayout>
