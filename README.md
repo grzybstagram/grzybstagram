@@ -1,3 +1,15 @@
+# 🍄 Aloha Fungi
+
+Grzyby funkcjonalne z polskiej uprawy — soplówka jeżowata (lion's mane), cordyceps, reishi.
+Functional mushrooms grown in Poland: extracts, functional cacao and an e-commerce built with Medusa v2 + Next.js.
+
+**🌐 [alohafungi.com](https://alohafungi.com/)** · [Sklep / Shop](https://alohafungi.com/produkty) · [Kawa grzybowa](https://alohafungi.com/kawa-grzybowa)
+
+Czytaj więcej / read more:
+[Grzyby na skupienie i pamięć](https://alohafungi.com/blog/grzyb-na-skupienie-i-pamiec) · [Cordyceps: energia i wydolność](https://alohafungi.com/blog/cordyceps-energia-wydolnosc)
+
+---
+
 # grzybstagram
 
 Niezależny blog o grzybach. Astro 6 + Tailwind + MDX.
